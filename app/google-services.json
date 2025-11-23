@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "556000435636",
+    "project_id": "busca-comercio-21539",
+    "storage_bucket": "busca-comercio-21539.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556000435636:android:e3b84086384edc6414a6e1",
+        "android_client_info": {
+          "package_name": "cl.unab.busca_comercio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwUMEhUnqFKOzqKAVkZHsl2MhX5YYtWR4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

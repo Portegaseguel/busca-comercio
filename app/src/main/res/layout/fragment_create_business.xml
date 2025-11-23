@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bc_background_dark"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/bc_card_dark"
+            android:padding="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp">
+
+            <!-- Título -->
+            <TextView
+                android:id="@+id/tvCreateBusinessTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Crear / Editar comercio"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/bc_text_primary"
+                android:paddingBottom="12dp" />
+
+            <!-- Nombre -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre del comercio"
+                android:textColor="@color/bc_text_secondary"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/etBusinessName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ej: Panadería Doña Rosa"
+                android:textColor="@color/bc_text_primary"
+                android:textColorHint="@color/bc_text_secondary"
+                android:backgroundTint="@color/bc_text_secondary"
+                android:inputType="textCapWords"
+                android:paddingBottom="8dp" />
+
+            <!-- Rubro -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rubro"
+                android:textColor="@color/bc_text_secondary"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
+
+            <EditText
+                android:id="@+id/etBusinessCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ej: Panadería, Peluquería, Taller mecánico"
+                android:textColor="@color/bc_text_primary"
+                android:textColorHint="@color/bc_text_secondary"
+                android:backgroundTint="@color/bc_text_secondary"
+                android:inputType="textCapWords" />
+
+            <!-- Dirección -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dirección"
+                android:textColor="@color/bc_text_secondary"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
+
+            <EditText
+                android:id="@+id/etBusinessAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ej: Av. Siempre Viva 742, Comuna"
+                android:textColor="@color/bc_text_primary"
+                android:textColorHint="@color/bc_text_secondary"
+                android:backgroundTint="@color/bc_text_secondary"
+                android:inputType="textCapSentences" />
+
+            <!-- Teléfono -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Teléfono (opcional)"
+                android:textColor="@color/bc_text_secondary"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
+
+            <EditText
+                android:id="@+id/etBusinessPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="+56 9 xxxx xxxx"
+                android:textColor="@color/bc_text_primary"
+                android:textColorHint="@color/bc_text_secondary"
+                android:backgroundTint="@color/bc_text_secondary"
+                android:inputType="phone" />
+
+            <!-- Horario -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Horario de atención (opcional)"
+                android:textColor="@color/bc_text_secondary"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
+
+            <EditText
+                android:id="@+id/etBusinessHours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ej: Lun a Vie 9:00 - 18:00"
+                android:textColor="@color/bc_text_primary"
+                android:textColorHint="@color/bc_text_secondary"
+                android:backgroundTint="@color/bc_text_secondary"
+                android:inputType="textCapSentences" />
+
+            <!-- Email -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Correo electrónico (opcional)"
+                android:textColor="@color/bc_text_secondary"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
+
+            <EditText
+                android:id="@+id/etBusinessEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="contacto@ejemplo.cl"
+                android:textColor="@color/bc_text_primary"
+                android:textColorHint="@color/bc_text_secondary"
+                android:backgroundTint="@color/bc_text_secondary"
+                android:inputType="textEmailAddress" />
+
+            <!-- Sitio web -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sitio web (opcional)"
+                android:textColor="@color/bc_text_secondary"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
+
+            <EditText
+                android:id="@+id/etBusinessWebsite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="https://tu-negocio.cl"
+                android:textColor="@color/bc_text_primary"
+                android:textColorHint="@color/bc_text_secondary"
+                android:backgroundTint="@color/bc_text_secondary"
+                android:inputType="textUri" />
+
+            <!-- Instagram -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Instagram (opcional)"
+                android:textColor="@color/bc_text_secondary"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
+
+            <EditText
+                android:id="@+id/etBusinessInstagram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@tu_emprendimiento"
+                android:textColor="@color/bc_text_primary"
+                android:textColorHint="@color/bc_text_secondary"
+                android:backgroundTint="@color/bc_text_secondary"
+                android:inputType="text" />
+
+            <!-- Botón Guardar -->
+            <Button
+                android:id="@+id/btnSaveBusiness"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Guardar comercio"
+                android:textAllCaps="false"
+                android:textColor="@color/bc_text_primary"
+                android:background="@color/bc_accent_green" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+

@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bc_background_dark">#020617</color>      <!-- fondo pantalla -->
+    <color name="bc_card_dark">#111827</color>           <!-- tarjetas / contenedores -->
+    <color name="bc_accent_green">#22C55E</color>        <!-- botones principales -->
+    <color name="bc_accent_green_dark">#15803D</color>   <!-- pressed -->
+    <color name="bc_text_primary">#F9FAFB</color>        <!-- texto principal -->
+    <color name="bc_text_secondary">#9CA3AF</color>      <!-- texto secundario -->
+    <color name="bc_chip_bg">#374151</color>             <!-- fondo chips / tags -->
+
 </resources>

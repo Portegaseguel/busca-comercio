@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="cl.unab.busca_comercio.ui.home.HomeFragment"
+        android:label="Home" />
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="cl.unab.busca_comercio.ui.auth.LoginFragment"
+        android:label="Login" />
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="cl.unab.busca_comercio.ui.auth.RegisterFragment"
+        android:label="Register" />
+
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="cl.unab.busca_comercio.ui.auth.WelcomeFragment"
+        android:label="Welcome" />
+
+    <!-- Crear / Editar comercio -->
+    <fragment
+        android:id="@+id/createBusinessFragment"
+        android:name="cl.unab.busca_comercio.ui.business.CreateBusinessFragment"
+        android:label="Create Business">
+
+        <!-- Si viene businessId => modo edición -->
+        <argument
+            android:name="businessId"
+            app:argType="string"
+            android:defaultValue="@null" />
+    </fragment>
+
+    <!-- Detalle de comercio (para futuro) -->
+    <fragment
+        android:id="@+id/businessDetailFragment"
+        android:name="cl.unab.busca_comercio.ui.business.BusinessDetailFragment"
+        android:label="Business Detail" />
+
+    <!-- Splash definido pero no es startDestination -->
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="cl.unab.busca_comercio.ui.common.SplashFragment"
+        android:label="Splash" />
+
+    <!-- Buscador -->
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="cl.unab.busca_comercio.ui.home.SearchFragment"
+        android:label="Buscar comercios" />
+
+    <!-- Mis comercios (del usuario logueado) -->
+    <fragment
+        android:id="@+id/myBusinessesFragment"
+        android:name="cl.unab.busca_comercio.ui.business.MyBusinessesFragment"
+        android:label="Mis comercios" />
+
+    <fragment
+        android:id="@+id/businessDetailFragment"
+        android:name="cl.unab.busca_comercio.ui.business.BusinessDetailFragment"
+        android:label="Business Detail">
+
+        <argument
+            android:name="businessId"
+            app:argType="string"
+            android:defaultValue="@null" />
+    </fragment>
+</navigation>

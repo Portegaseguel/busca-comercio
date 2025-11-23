@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bc_background_dark"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Card principal del comercio -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/bc_card_dark"
+            android:padding="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp">
+
+            <!-- Nombre -->
+            <TextView
+                android:id="@+id/tvDetailName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre del comercio"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/bc_text_primary"
+                android:paddingBottom="8dp" />
+
+            <!-- Rubro -->
+            <TextView
+                android:id="@+id/tvDetailCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rubro"
+                android:textSize="16sp"
+                android:textColor="@color/bc_text_secondary"
+                android:paddingBottom="4dp" />
+
+            <!-- Dirección -->
+            <TextView
+                android:id="@+id/tvDetailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dirección"
+                android:textSize="16sp"
+                android:textColor="@color/bc_text_secondary"
+                android:paddingBottom="16dp" />
+
+            <!-- Separador -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bc_chip_bg"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Sección contacto -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contacto"
+                android:textColor="@color/bc_text_primary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingBottom="8dp" />
+
+            <!-- Teléfono -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_phone"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Teléfono:"
+                    android:textColor="@color/bc_text_secondary"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDetailPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No registrado"
+                android:textColor="@color/bc_text_primary"
+                android:textSize="14sp"
+                android:paddingBottom="8dp" />
+
+            <!-- Horario -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_schedule"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Horario:"
+                    android:textColor="@color/bc_text_secondary"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDetailHours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No registrado"
+                android:textColor="@color/bc_text_primary"
+                android:textSize="14sp"
+                android:paddingBottom="8dp" />
+
+            <!-- Email -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_email"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Correo:"
+                    android:textColor="@color/bc_text_secondary"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDetailEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No registrado"
+                android:textColor="@color/bc_text_primary"
+                android:textSize="14sp"
+                android:paddingBottom="12dp" />
+
+            <!-- Sección web / redes -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Web y redes sociales"
+                android:textColor="@color/bc_text_primary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingBottom="8dp" />
+
+            <!-- Sitio web -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_web"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sitio web:"
+                    android:textColor="@color/bc_text_secondary"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDetailWebsite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No registrado"
+                android:textColor="@color/bc_text_primary"
+                android:textSize="14sp"
+                android:paddingBottom="8dp" />
+
+            <!-- Instagram -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_instagram"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Instagram:"
+                    android:textColor="@color/bc_text_secondary"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDetailInstagram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No registrado"
+                android:textColor="@color/bc_text_primary"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressDetail"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone" />
+    </LinearLayout>
+</ScrollView>
+
+
