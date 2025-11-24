@@ -49,7 +49,15 @@ Administración de comercios propios.
 Eliminación completa de cuenta y datos.
 Pantalla de cuenta personalizada.
 
-7. Conclusión
+7. Testing
+
+La aplicación cuenta con pruebas automáticas que validan tanto la lógica como la interfaz.
+Se implementaron 2 tests unitarios (validación de formato de email y formateo de nombre) 
+y 2 tests de UI con Espresso (verificación del texto principal de la pantalla inicial y 
+la presencia del botón de acceso a inicio de sesión). Todas las pruebas se ejecutan 
+correctamente.
+
+8. Conclusión
 
 Busca Comercio implementa navegación moderna, manejo profesional de Firebase, diseño 
 consistente y funcionalidades completas que cumplen y superan los requisitos del 
