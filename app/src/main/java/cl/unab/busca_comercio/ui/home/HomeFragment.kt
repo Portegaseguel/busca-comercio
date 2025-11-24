@@ -30,19 +30,16 @@ class HomeFragment : Fragment() {
 
         val currentUser = auth.currentUser
 
-        // Botón buscar: siempre disponible sin sesión
         btnGoToSearch.setOnClickListener {
             findNavController().navigate(R.id.searchFragment)
         }
 
         if (currentUser == null) {
-            // Usuario NO autenticado: mostrar login/registro
             btnGoToLogin.text = "Iniciar sesión / Crear cuenta"
             btnGoToLogin.setOnClickListener {
                 findNavController().navigate(R.id.loginFragment)
             }
         } else {
-            // Usuario autenticado: mostrar acceso a "mi cuenta" (pantalla de bienvenida)
             btnGoToLogin.text = "Ver mi cuenta"
             btnGoToLogin.setOnClickListener {
                 findNavController().navigate(R.id.welcomeFragment)

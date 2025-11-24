@@ -73,7 +73,7 @@ class RateDialogFragment : DialogFragment() {
                 val commentText = etComment.text.toString().trim()
                 val now = System.currentTimeMillis()
 
-                // Nombre visible del usuario (mismo criterio que WelcomeFragment)
+                // Nombre visible del usuario
                 val rawName: String? = when {
                     user.displayName?.isNotBlank() == true -> user.displayName
                     user.email?.isNotBlank() == true       -> user.email!!.substringBefore("@")

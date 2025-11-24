@@ -6,22 +6,52 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AutoCompleteTextView
 import android.widget.EditText
-import android.widget.TextView
+import android.widget.ProgressBar
+import android.widget.Toast
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cl.unab.busca_comercio.R
 import cl.unab.busca_comercio.data.model.Business
 import cl.unab.busca_comercio.data.repository.BusinessRepository
+import org.json.JSONObject
+import androidx.navigation.fragment.findNavController
+
 
 class SearchFragment : Fragment() {
 
     private val repository = BusinessRepository()
 
-    private lateinit var adapter: BusinessAdapter
+    private lateinit var etSearch: EditText
+    private lateinit var actFilterCategory: AutoCompleteTextView
+    private lateinit var actFilterProvince: AutoCompleteTextView
+    private lateinit var rvBusinessList: RecyclerView
+    private lateinit var progress: ProgressBar
+
+    private lateinit var adapter: cl.unab.busca_comercio.ui.home.BusinessAdapter
+
     private var allBusinesses: List<Business> = emptyList()
+    private var provinces: List<String> = emptyList()
+
+    private val businessCategories = listOf(
+        "Alimentación",
+        "Salud y belleza",
+        "Ropa y accesorios",
+        "Servicios profesionales",
+        "Mascotas",
+        "Tecnología",
+        "Educación",
+        "Construcción",
+        "Bienes Raíces",
+        "Entretenimiento",
+        "Hoteleria y Turismo",
+        "Juguetería e Intantil",
+        "Deporte",
+        "Otros"
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,12 +64,14 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val etSearch = view.findViewById<EditText>(R.id.etSearch)
-        val rvBusinesses = view.findViewById<RecyclerView>(R.id.rvBusinesses)
-        val tvEmpty = view.findViewById<TextView>(R.id.tvSearchEmpty)
+        etSearch = view.findViewById(R.id.etSearch)
+        actFilterCategory = view.findViewById(R.id.actFilterCategory)
+        actFilterProvince = view.findViewById(R.id.actFilterProvince)
+        rvBusinessList = view.findViewById(R.id.rvBusinessList)
+        progress = view.findViewById(R.id.progressSearch)
 
-        // Al tocar un comercio desde el buscador -> ir al detalle
-        adapter = BusinessAdapter(
+        rvBusinessList.layoutManager = LinearLayoutManager(requireContext())
+        adapter = cl.unab.busca_comercio.ui.home.BusinessAdapter(emptyList(),
             onItemClick = { business ->
                 val bundle = Bundle().apply {
                     putString("businessId", business.id)
@@ -47,58 +79,157 @@ class SearchFragment : Fragment() {
                 findNavController().navigate(R.id.businessDetailFragment, bundle)
             }
         )
+        rvBusinessList.adapter = adapter
 
-        rvBusinesses.layoutManager = LinearLayoutManager(requireContext())
-        rvBusinesses.adapter = adapter
+        // Cargar provincias desde el JSON local
+        loadProvincesFromJson()
 
-        // Cargar comercios desde Firestore
+        setupCategoryFilter()
+        setupProvinceFilter()
+        setupSearchListener()
+
+        loadBusinesses()
+    }
+
+    // --- Carga todos los comercios desde Firestore ---
+    private fun loadBusinesses() {
+        progress.visibility = View.VISIBLE
+
         repository.getAllBusinesses { list, error ->
+            progress.visibility = View.GONE
+
             if (error != null) {
-                tvEmpty.text = "Error al cargar comercios: $error"
-                tvEmpty.visibility = View.VISIBLE
+                Toast.makeText(
+                    requireContext(),
+                    "Error al cargar comercios: $error",
+                    Toast.LENGTH_LONG
+                ).show()
                 return@getAllBusinesses
             }
 
             allBusinesses = list
+            applyFilters()
+        }
+    }
 
-            if (list.isEmpty()) {
-                tvEmpty.text = "Aún no hay comercios registrados."
-                tvEmpty.visibility = View.VISIBLE
-            } else {
-                tvEmpty.visibility = View.GONE
-                adapter.updateData(list)
+    // --- Cargar Provincias desde json ---
+    private fun loadProvincesFromJson() {
+        try {
+            val inputStream = resources.openRawResource(R.raw.regiones_provincias)
+            val jsonText = inputStream.bufferedReader().use { it.readText() }
+
+            val jsonObject = JSONObject(jsonText)
+            val setProvinces = linkedSetOf<String>()
+
+            val keys = jsonObject.keys()
+            while (keys.hasNext()) {
+                val regionName = keys.next()
+                val provincesArray = jsonObject.getJSONArray(regionName)
+                for (i in 0 until provincesArray.length()) {
+                    setProvinces.add(provincesArray.getString(i))
+                }
             }
+
+            provinces = setProvinces.toList().sorted()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(
+                requireContext(),
+                "Error al cargar provincias: ${e.message}",
+                Toast.LENGTH_SHORT
+            ).show()
+            provinces = emptyList()
+        }
+    }
+
+    // --- Filtro por Rubro ---
+    private fun setupCategoryFilter() {
+        val items = listOf("Todos") + businessCategories
+        val adapterCat = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_list_item_1,
+            items
+        )
+        actFilterCategory.setAdapter(adapterCat)
+
+        actFilterCategory.setOnClickListener {
+            actFilterCategory.showDropDown()
         }
 
-        // Filtro simple por texto
+        actFilterCategory.setOnItemClickListener { _, _, _, _ ->
+            applyFilters()
+        }
+    }
+
+    // --- Filtro por Provincia ---
+    private fun setupProvinceFilter() {
+        val items = listOf("Todas") + provinces
+
+        val adapterProv = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_list_item_1,
+            items
+        )
+        actFilterProvince.setAdapter(adapterProv)
+
+        actFilterProvince.setOnClickListener {
+            actFilterProvince.showDropDown()
+        }
+
+        actFilterProvince.setOnItemClickListener { _, _, _, _ ->
+            applyFilters()
+        }
+    }
+
+    // --- Texto de busqueda ---
+    private fun setupSearchListener() {
         etSearch.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(s: Editable?) {
+                applyFilters()
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // no-op
+            }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val query = s?.toString()?.trim()?.lowercase() ?: ""
-                filterList(query, tvEmpty)
+                // no-op
             }
         })
     }
 
-    private fun filterList(query: String, tvEmpty: TextView) {
-        if (query.isEmpty()) {
-            adapter.updateData(allBusinesses)
-            tvEmpty.visibility = if (allBusinesses.isEmpty()) View.VISIBLE else View.GONE
-            return
+    // --- Aplicar busqueda y filtros sobre la lista completa ---
+    private fun applyFilters() {
+        val query = etSearch.text.toString().trim().lowercase()
+        val selectedCategory = actFilterCategory.text.toString().trim()
+        val selectedProvince = actFilterProvince.text.toString().trim()
+
+        var result = allBusinesses
+
+        // Filtro por texto (nombre / rubro / direccion)
+        if (query.isNotEmpty()) {
+            result = result.filter { business ->
+                business.name.contains(query, ignoreCase = true) ||
+                        business.category.contains(query, ignoreCase = true) ||
+                        business.address.contains(query, ignoreCase = true)
+            }
         }
 
-        val filtered = allBusinesses.filter { b ->
-            b.name.lowercase().contains(query) ||
-                    b.category.lowercase().contains(query) ||
-                    b.address.lowercase().contains(query)
+        // Filtro por rubro
+        if (selectedCategory.isNotEmpty() && selectedCategory != "Todos") {
+            result = result.filter { business ->
+                business.category.equals(selectedCategory, ignoreCase = true)
+            }
         }
 
-        adapter.updateData(filtered)
-        tvEmpty.visibility = if (filtered.isEmpty()) View.VISIBLE else View.GONE
-        if (filtered.isEmpty()) {
-            tvEmpty.text = "No se encontraron comercios para \"$query\"."
+        // Filtro por provincia
+        if (selectedProvince.isNotEmpty() && selectedProvince != "Todas") {
+            result = result.filter { business ->
+                business.address.contains(selectedProvince, ignoreCase = true)
+            }
         }
+
+        adapter.updateData(result)
     }
 }
+

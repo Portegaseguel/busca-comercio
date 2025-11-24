@@ -51,14 +51,12 @@ class MyBusinessesFragment : Fragment() {
 
         adapter = BusinessAdapter(
             onItemClick = { business ->
-                // 👉 Editar comercio: vamos a CreateBusinessFragment con el id
                 val bundle = Bundle().apply {
                     putString("businessId", business.id)
                 }
                 findNavController().navigate(R.id.createBusinessFragment, bundle)
             },
             onItemLongClick = { business ->
-                // 👉 Eliminar comercio (ya lo teníamos)
                 showDeleteDialog(business)
             }
         )
@@ -78,7 +76,6 @@ class MyBusinessesFragment : Fragment() {
             return
         }
 
-        // Botón para crear nuevo comercio
         btnAddBusiness.setOnClickListener {
             findNavController().navigate(R.id.createBusinessFragment)
         }

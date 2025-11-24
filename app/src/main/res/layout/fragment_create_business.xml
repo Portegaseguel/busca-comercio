@@ -45,6 +45,7 @@
                 android:hint="Ej: Panadería Doña Rosa"
                 android:textColor="@color/bc_text_primary"
                 android:textColorHint="@color/bc_text_secondary"
+                android:textSize="14sp"
                 android:backgroundTint="@color/bc_text_secondary"
                 android:inputType="textCapWords"
                 android:paddingBottom="8dp" />
@@ -58,21 +59,22 @@
                 android:textSize="14sp"
                 android:layout_marginTop="8dp" />
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/etBusinessCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ej: Panadería, Peluquería, Taller mecánico"
+                android:hint="Selecciona un rubro"
                 android:textColor="@color/bc_text_primary"
                 android:textColorHint="@color/bc_text_secondary"
+                android:textSize="14sp"
                 android:backgroundTint="@color/bc_text_secondary"
-                android:inputType="textCapWords" />
+                android:inputType="none" />
 
             <!-- Dirección -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dirección"
+                android:text="Dirección (calle y número)"
                 android:textColor="@color/bc_text_secondary"
                 android:textSize="14sp"
                 android:layout_marginTop="8dp" />
@@ -81,11 +83,72 @@
                 android:id="@+id/etBusinessAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ej: Av. Siempre Viva 742, Comuna"
+                android:hint="Ej: Av. Siempre Viva 742"
                 android:textColor="@color/bc_text_primary"
                 android:textColorHint="@color/bc_text_secondary"
+                android:textSize="14sp"
                 android:backgroundTint="@color/bc_text_secondary"
                 android:inputType="textCapSentences" />
+
+            <!-- Región -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Región"
+                android:textColor="@color/bc_text_secondary"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/etBusinessRegion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Selecciona región"
+                android:textColor="@color/bc_text_primary"
+                android:textColorHint="@color/bc_text_secondary"
+                android:textSize="14sp"
+                android:backgroundTint="@color/bc_text_secondary"
+                android:inputType="none" />
+
+            <!-- Provincia -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Provincia"
+                android:textColor="@color/bc_text_secondary"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/etBusinessProvince"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Selecciona provincia"
+                android:textColor="@color/bc_text_primary"
+                android:textColorHint="@color/bc_text_secondary"
+                android:textSize="14sp"
+                android:backgroundTint="@color/bc_text_secondary"
+                android:inputType="none" />
+
+            <!-- Comuna -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Comuna"
+                android:textColor="@color/bc_text_secondary"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
+
+            <EditText
+                android:id="@+id/etBusinessCommune"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ingresa comuna"
+                android:textColor="@color/bc_text_primary"
+                android:textColorHint="@color/bc_text_secondary"
+                android:textSize="14sp"
+                android:backgroundTint="@color/bc_text_secondary"
+                android:inputType="textCapWords" />
 
             <!-- Teléfono -->
             <TextView
@@ -103,6 +166,7 @@
                 android:hint="+56 9 xxxx xxxx"
                 android:textColor="@color/bc_text_primary"
                 android:textColorHint="@color/bc_text_secondary"
+                android:textSize="14sp"
                 android:backgroundTint="@color/bc_text_secondary"
                 android:inputType="phone" />
 
@@ -119,11 +183,14 @@
                 android:id="@+id/etBusinessHours"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ej: Lun a Vie 9:00 - 18:00"
+                android:hint="Toca para seleccionar días y horas"
                 android:textColor="@color/bc_text_primary"
                 android:textColorHint="@color/bc_text_secondary"
+                android:textSize="14sp"
                 android:backgroundTint="@color/bc_text_secondary"
-                android:inputType="textCapSentences" />
+                android:inputType="none"
+                android:focusable="false"
+                android:clickable="true" />
 
             <!-- Email -->
             <TextView
@@ -141,6 +208,7 @@
                 android:hint="contacto@ejemplo.cl"
                 android:textColor="@color/bc_text_primary"
                 android:textColorHint="@color/bc_text_secondary"
+                android:textSize="14sp"
                 android:backgroundTint="@color/bc_text_secondary"
                 android:inputType="textEmailAddress" />
 
@@ -160,6 +228,7 @@
                 android:hint="https://tu-negocio.cl"
                 android:textColor="@color/bc_text_primary"
                 android:textColorHint="@color/bc_text_secondary"
+                android:textSize="14sp"
                 android:backgroundTint="@color/bc_text_secondary"
                 android:inputType="textUri" />
 
@@ -179,6 +248,7 @@
                 android:hint="@tu_emprendimiento"
                 android:textColor="@color/bc_text_primary"
                 android:textColorHint="@color/bc_text_secondary"
+                android:textSize="14sp"
                 android:backgroundTint="@color/bc_text_secondary"
                 android:inputType="text" />
 
@@ -190,9 +260,11 @@
                 android:layout_marginTop="16dp"
                 android:text="Guardar comercio"
                 android:textAllCaps="false"
+                android:textStyle="bold"
                 android:textColor="@color/bc_text_primary"
-                android:background="@color/bc_accent_green" />
+                android:backgroundTint="@color/bc_accent_green" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
+
 

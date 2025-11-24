@@ -7,5 +7,5 @@ data class Rating(
     val userName: String = "",      // nombre visible del usuario
     val stars: Int = 0,             // 1 a 5
     val comment: String? = null,    // comentario opcional
-    val createdAt: Long = 0L        // timestamp en milisegundos (opcional)
+    val createdAt: Long = 0L        // timestamp en milisegundos
 )

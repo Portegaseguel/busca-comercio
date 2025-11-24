@@ -25,7 +25,6 @@ class RatingAdapter(
             val nameToShow = item.userName.ifBlank { "Usuario" }
             tvUserName.text = nameToShow
 
-            // Convertimos el número de estrellas en dibujito: ★★★☆☆
             val fullStar = "★"
             val emptyStar = "☆"
             val starsClamped = item.stars.coerceIn(1, 5)

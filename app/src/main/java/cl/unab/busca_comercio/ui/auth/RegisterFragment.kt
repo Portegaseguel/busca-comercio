@@ -53,7 +53,6 @@ class RegisterFragment : Fragment() {
 
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
-                    // Más adelante podemos guardar el nombre en Firestore
                     findNavController().navigate(R.id.welcomeFragment)
                 }
                 .addOnFailureListener { e ->

@@ -123,7 +123,7 @@ class BusinessDetailFragment : Fragment() {
             tvWebsite.text = if (business.website.isBlank()) "No registrado" else business.website
             tvInstagram.text = if (business.instagram.isBlank()) "No registrado" else business.instagram
 
-            // Mostrar / ocultar botón de valorar según sesión
+            // Mostrar / ocultar boton de valoracion segun sesion
             val user = FirebaseAuth.getInstance().currentUser
             btnRate.visibility = if (user == null) View.GONE else View.VISIBLE
 
@@ -131,13 +131,13 @@ class BusinessDetailFragment : Fragment() {
                 openRateDialog(business.id)
             }
 
-            // Hacer clicables según haya datos
+            // Hacer clicables
             setupPhoneClick(business.phone)
             setupEmailClick(business.email)
             setupWebsiteClick(business.website)
             setupInstagramClick(business.instagram)
 
-            // Cargar comentarios de este comercio (aquí también vamos a recalcular el promedio)
+            // Cargar comentarios
             loadRatingsForBusiness(business.id)
         }
     }
@@ -150,13 +150,13 @@ class BusinessDetailFragment : Fragment() {
                 val list = snapshot.documents.mapNotNull { it.toObject(Rating::class.java) }
                 commentsAdapter.updateData(list)
 
-                // Recalcular promedio y cantidad desde estas valoraciones
+                // Promedio y cantidad desde valoraciones
                 val ctx = context ?: return@addOnSuccessListener
 
                 if (list.isEmpty()) {
                     tvRating.text = "Sin valoraciones"
 
-                    // También actualizamos el negocio en Firestore (por consistencia con el listado)
+                    // Actualiza el negocio en Firestore
                     firestore.collection("businesses")
                         .document(businessId)
                         .update(
@@ -174,7 +174,6 @@ class BusinessDetailFragment : Fragment() {
 
                 tvRating.text = "⭐ %.1f (%d valoraciones)".format(avg, count)
 
-                // Guardamos estos datos también en el documento del negocio
                 val updates = mapOf(
                     "avgRating" to avg,
                     "ratingCount" to count
@@ -197,7 +196,6 @@ class BusinessDetailFragment : Fragment() {
     private fun openRateDialog(businessId: String) {
         val dialog = RateDialogFragment.newInstance(businessId)
         dialog.onRatingSaved = {
-            // Recargar datos (incluye promedio y comentarios) solo si el fragment sigue activo
             val id = this.businessId
             if (isAdded && id != null) {
                 loadBusiness(id)
@@ -206,7 +204,7 @@ class BusinessDetailFragment : Fragment() {
         dialog.show(parentFragmentManager, "RateDialog")
     }
 
-    // --- TELÉFONO: llamar o WhatsApp ---
+    // --- TELEFONO: llamar o WhatsApp ---
     private fun setupPhoneClick(phoneRaw: String) {
         if (phoneRaw.isBlank()) {
             tvPhone.setOnClickListener(null)
@@ -260,7 +258,7 @@ class BusinessDetailFragment : Fragment() {
         openExternalLink(url)
     }
 
-    // --- EMAIL: abrir cliente de correo ---
+    // --- EMAIL: abrir correo ---
     private fun setupEmailClick(emailRaw: String) {
         if (emailRaw.isBlank()) {
             tvEmail.setOnClickListener(null)

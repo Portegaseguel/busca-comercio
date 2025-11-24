@@ -11,7 +11,6 @@ class BusinessRepository {
     private val ratingsCollection = db.collection("ratings")
 
     fun addBusiness(business: Business, callback: (Boolean, String?) -> Unit) {
-        // Si no trae id -> creamos uno nuevo
         val docRef = if (business.id.isBlank()) {
             collection.document()
         } else {
@@ -112,7 +111,7 @@ class BusinessRepository {
                 (oldAvg * oldCount + stars) / newCount
             }
 
-            // Guardamos el rating y actualizamos el negocio
+            // Guardar el rating y actualizar el negocio
             transaction.set(ratingDoc, rating)
             transaction.update(
                 businessRef,

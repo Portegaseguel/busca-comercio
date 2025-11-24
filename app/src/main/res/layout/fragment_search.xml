@@ -6,43 +6,153 @@
     android:background="@color/bc_background_dark"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tvSearchTitle"
+    <!-- CONTENEDOR BUSCADOR + FILTROS -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/bc_card_dark"
+        android:padding="16dp"
+        android:layout_marginBottom="12dp">
+
+        <!-- Título buscador -->
+        <TextView
+            android:id="@+id/tvSearchTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Busca un comercio"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/bc_text_primary"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/tvSearchSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Puedes buscar por nombre, rubro o dirección, y filtrar por rubro y provincia."
+            android:textSize="13sp"
+            android:textColor="@color/bc_text_secondary"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Barra de búsqueda -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/bc_chip_bg"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_search"
+                android:tint="@color/bc_text_secondary"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="Buscar comercio..."
+                android:textColor="@color/bc_text_primary"
+                android:textColorHint="@color/bc_text_secondary"
+                android:background="@android:color/transparent"
+                android:inputType="text"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <!-- FILTROS (Rubro y Provincia) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <!-- Filtro Rubro -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginEnd="4dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Rubro"
+                    android:textSize="12sp"
+                    android:textColor="@color/bc_text_secondary" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/actFilterCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="Todos"
+                    android:textColor="@color/bc_text_primary"
+                    android:textColorHint="@color/bc_text_secondary"
+                    android:background="@color/bc_chip_bg"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:inputType="none"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Filtro Provincia -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="4dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Provincia"
+                    android:textSize="12sp"
+                    android:textColor="@color/bc_text_secondary" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/actFilterProvince"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="Todas"
+                    android:textColor="@color/bc_text_primary"
+                    android:textColorHint="@color/bc_text_secondary"
+                    android:background="@color/bc_chip_bg"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:inputType="none"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressSearch"
+        style="?android:attr/progressBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Buscador de comercios"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/bc_text_primary"
-        android:layout_marginBottom="12dp" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
 
-    <EditText
-        android:id="@+id/etSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Buscar por nombre, rubro o comuna…"
-        android:background="@color/bc_card_dark"
-        android:padding="10dp"
-        android:textColor="@color/bc_text_primary"
-        android:textColorHint="@color/bc_text_secondary"
-        android:layout_marginBottom="12dp" />
-
-    <TextView
-        android:id="@+id/tvSearchEmpty"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Aún no hay comercios registrados."
-        android:textSize="14sp"
-        android:textColor="@color/bc_text_secondary"
-        android:visibility="gone"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp" />
-
+    <!-- LISTA DE COMERCIOS -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvBusinesses"
+        android:id="@+id/rvBusinessList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp" />
 
 </LinearLayout>
+
+
 

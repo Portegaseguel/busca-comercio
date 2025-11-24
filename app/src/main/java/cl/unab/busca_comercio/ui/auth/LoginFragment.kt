@@ -53,7 +53,6 @@ class LoginFragment : Fragment() {
 
             auth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
-                    // Login ok -> ir a Welcome
                     findNavController().navigate(R.id.welcomeFragment)
                 }
                 .addOnFailureListener { e ->

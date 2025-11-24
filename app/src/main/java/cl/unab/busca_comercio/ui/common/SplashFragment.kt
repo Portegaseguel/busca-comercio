@@ -23,7 +23,6 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Pequeño delay para mostrar el splash y luego ir al Home
         Handler(Looper.getMainLooper()).postDelayed({
             findNavController().navigate(R.id.homeFragment)
         }, 1000) // 1 segundo

@@ -30,24 +30,11 @@
         android:name="cl.unab.busca_comercio.ui.business.CreateBusinessFragment"
         android:label="Create Business">
 
-        <!-- Si viene businessId => modo edición -->
         <argument
             android:name="businessId"
             app:argType="string"
             android:defaultValue="@null" />
     </fragment>
-
-    <!-- Detalle de comercio (para futuro) -->
-    <fragment
-        android:id="@+id/businessDetailFragment"
-        android:name="cl.unab.busca_comercio.ui.business.BusinessDetailFragment"
-        android:label="Business Detail" />
-
-    <!-- Splash definido pero no es startDestination -->
-    <fragment
-        android:id="@+id/splashFragment"
-        android:name="cl.unab.busca_comercio.ui.common.SplashFragment"
-        android:label="Splash" />
 
     <!-- Buscador -->
     <fragment
@@ -55,12 +42,13 @@
         android:name="cl.unab.busca_comercio.ui.home.SearchFragment"
         android:label="Buscar comercios" />
 
-    <!-- Mis comercios (del usuario logueado) -->
+    <!-- Mis comercios -->
     <fragment
         android:id="@+id/myBusinessesFragment"
         android:name="cl.unab.busca_comercio.ui.business.MyBusinessesFragment"
         android:label="Mis comercios" />
 
+    <!-- Detalle de comercio -->
     <fragment
         android:id="@+id/businessDetailFragment"
         android:name="cl.unab.busca_comercio.ui.business.BusinessDetailFragment"
@@ -71,4 +59,11 @@
             app:argType="string"
             android:defaultValue="@null" />
     </fragment>
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="cl.unab.busca_comercio.ui.common.SplashFragment"
+        android:label="Splash" />
+
 </navigation>
+

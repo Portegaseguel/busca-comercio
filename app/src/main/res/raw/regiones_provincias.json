@@ -1,0 +1,90 @@
+{
+  "Arica y Parinacota": [
+    "Arica",
+    "Parinacota"
+  ],
+  "Tarapacá": [
+    "Iquique",
+    "El Tamarugal"
+  ],
+  "Antofagasta": [
+    "Antofagasta",
+    "El Loa",
+    "Tocopilla"
+  ],
+  "Atacama": [
+    "Copiapó",
+    "Chañaral",
+    "Huasco"
+  ],
+  "Coquimbo": [
+    "Elqui",
+    "Choapa",
+    "Limarí"
+  ],
+  "Valparaíso": [
+    "Valparaíso",
+    "Isla de Pascua",
+    "Los Andes",
+    "Petorca",
+    "Quillota",
+    "San Antonio",
+    "San Felipe de Aconcagua",
+    "Marga Marga"
+  ],
+  "O'Higgins": [
+    "Cachapoal",
+    "Colchagua",
+    "Cardenal Caro"
+  ],
+  "Maule": [
+    "Talca",
+    "Curicó",
+    "Linares",
+    "Cauquenes"
+  ],
+  "Ñuble": [
+    "Diguillín",
+    "Punilla",
+    "Itata"
+  ],
+  "Biobío": [
+    "Concepción",
+    "Arauco",
+    "Biobío"
+  ],
+  "La Araucanía": [
+    "Cautín",
+    "Malleco"
+  ],
+  "Los Ríos": [
+    "Valdivia",
+    "Ranco"
+  ],
+  "Los Lagos": [
+    "Llanquihue",
+    "Chiloé",
+    "Osorno",
+    "Palena"
+  ],
+  "Aysén": [
+    "Coyhaique",
+    "Aysén",
+    "Capitán Prat",
+    "General Carrera"
+  ],
+  "Magallanes": [
+    "Magallanes",
+    "Última Esperanza",
+    "Tierra del Fuego",
+    "Antártica Chilena"
+  ],
+  "Región Metropolitana": [
+    "Santiago",
+    "Cordillera",
+    "Chacabuco",
+    "Maipo",
+    "Melipilla",
+    "Talagante"
+  ]
+}

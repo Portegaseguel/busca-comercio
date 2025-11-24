@@ -22,7 +22,7 @@ class BusinessAdapter(
         private val rbStars: RatingBar = itemView.findViewById(R.id.rbBusinessStars)
 
         fun bind(item: Business) {
-            // Nombre, rubro y dirección
+            // Nombre, rubro y direccion
             tvName.text = item.name.ifBlank { "Sin nombre" }
             tvCategory.text = item.category.ifBlank { "Sin rubro" }
 

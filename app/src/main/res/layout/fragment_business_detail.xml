@@ -58,7 +58,7 @@
                 android:background="@color/bc_chip_bg"
                 android:layout_marginBottom="12dp" />
 
-            <!-- Sección contacto -->
+            <!-- Seccion contacto -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
                 android:textSize="14sp"
                 android:paddingBottom="12dp" />
 
-            <!-- Sección web / redes -->
+            <!-- Seccion web / redes -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

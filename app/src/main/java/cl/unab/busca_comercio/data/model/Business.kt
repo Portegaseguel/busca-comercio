@@ -14,7 +14,7 @@ data class Business(
     val website: String = "",
     val instagram: String = "",
 
-    // Futuro: valoraciones
+    // Valoraciones
     val avgRating: Double = 0.0,
     val ratingCount: Int = 0
 )
