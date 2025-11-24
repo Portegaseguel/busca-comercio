@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/bc_card_dark">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¿Cómo valorarías este comercio?"
+        android:textSize="16sp"
+        android:textColor="@color/bc_text_primary"
+        android:paddingBottom="12dp" />
+
+    <RatingBar
+        android:id="@+id/rbStars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1"
+        android:rating="0"
+        android:progressTint="@color/bc_accent_green"
+        android:secondaryProgressTint="@color/bc_chip_bg" />
+
+    <EditText
+        android:id="@+id/etComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Comentario (opcional)"
+        android:inputType="textCapSentences|textMultiLine"
+        android:minLines="3"
+        android:textColor="@color/bc_text_primary"
+        android:textColorHint="@color/bc_text_secondary"
+        android:background="@color/bc_chip_bg"
+        android:padding="10dp"
+        android:layout_marginTop="12dp"/>
+</LinearLayout>
+
+

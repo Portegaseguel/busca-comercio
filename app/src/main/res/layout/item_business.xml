@@ -29,10 +29,25 @@
         android:id="@+id/tvBusinessAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dirección · Comuna"
+        android:text="Dirección"
         android:textSize="13sp"
         android:textColor="@color/bc_text_secondary"
         android:layout_marginTop="2dp" />
 
+    <!-- Rating promedio del negocio -->
+    <RatingBar
+        android:id="@+id/rbBusinessStars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/ratingBarStyleSmall"
+        android:numStars="5"
+        android:stepSize="0.5"
+        android:isIndicator="true"
+        android:layout_marginTop="6dp"
+        android:progressTint="@color/bc_accent_green"
+        android:secondaryProgressTint="@color/bc_chip_bg" />
+
 </LinearLayout>
+
+
 

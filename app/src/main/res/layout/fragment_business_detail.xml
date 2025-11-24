@@ -227,6 +227,55 @@
                 android:text="No registrado"
                 android:textColor="@color/bc_text_primary"
                 android:textSize="14sp" />
+
+            <!-- Separador valoraciones -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bc_chip_bg"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Valoraciones -->
+            <TextView
+                android:id="@+id/tvDetailRating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sin valoraciones"
+                android:textColor="@color/bc_text_primary"
+                android:textSize="14sp"
+                android:paddingBottom="8dp" />
+
+            <Button
+                android:id="@+id/btnRateBusiness"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Valorar este comercio"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/bc_accent_green" />
+
+
+            <TextView
+                android:id="@+id/tvCommentsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Comentarios"
+                android:textColor="@color/bc_text_primary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvComments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
         </LinearLayout>
 
         <ProgressBar
@@ -238,5 +287,6 @@
             android:visibility="gone" />
     </LinearLayout>
 </ScrollView>
+
 
 

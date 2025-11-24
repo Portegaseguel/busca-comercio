@@ -7,10 +7,10 @@
     android:padding="24dp">
 
     <TextView
-        android:id="@+id/tvWelcomeTitle"
+        android:id="@+id/tvWelcomeMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¡Bienvenida!"
+        android:text="¡Bienvenid@!"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@color/bc_text_primary"
@@ -62,5 +62,6 @@
         android:layout_marginTop="24dp" />
 
 </LinearLayout>
+
 
 

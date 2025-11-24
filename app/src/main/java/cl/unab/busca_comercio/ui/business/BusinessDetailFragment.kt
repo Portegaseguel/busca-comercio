@@ -6,17 +6,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import cl.unab.busca_comercio.R
+import cl.unab.busca_comercio.data.model.Rating
 import cl.unab.busca_comercio.data.repository.BusinessRepository
+import cl.unab.busca_comercio.ui.common.RateDialogFragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class BusinessDetailFragment : Fragment() {
 
     private val repository = BusinessRepository()
+    private val firestore = FirebaseFirestore.getInstance()
 
     private var businessId: String? = null
 
@@ -29,6 +37,13 @@ class BusinessDetailFragment : Fragment() {
     private lateinit var tvWebsite: TextView
     private lateinit var tvInstagram: TextView
     private lateinit var progress: ProgressBar
+
+    private lateinit var tvRating: TextView
+    private lateinit var btnRate: Button
+
+    // Lista de comentarios / valoraciones
+    private lateinit var rvComments: RecyclerView
+    private lateinit var commentsAdapter: RatingAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +71,14 @@ class BusinessDetailFragment : Fragment() {
         tvInstagram = view.findViewById(R.id.tvDetailInstagram)
         progress = view.findViewById(R.id.progressDetail)
 
+        tvRating = view.findViewById(R.id.tvDetailRating)
+        btnRate = view.findViewById(R.id.btnRateBusiness)
+
+        rvComments = view.findViewById(R.id.rvComments)
+        rvComments.layoutManager = LinearLayoutManager(requireContext())
+        commentsAdapter = RatingAdapter(emptyList())
+        rvComments.adapter = commentsAdapter
+
         val id = businessId
         if (id == null) {
             Toast.makeText(requireContext(), "No se encontró el comercio", Toast.LENGTH_LONG).show()
@@ -69,11 +92,12 @@ class BusinessDetailFragment : Fragment() {
         progress.visibility = View.VISIBLE
 
         repository.getBusinessById(id) { business, error ->
+            val ctx = context ?: return@getBusinessById
             progress.visibility = View.GONE
 
             if (error != null) {
                 Toast.makeText(
-                    requireContext(),
+                    ctx,
                     "Error al cargar comercio: $error",
                     Toast.LENGTH_LONG
                 ).show()
@@ -82,7 +106,7 @@ class BusinessDetailFragment : Fragment() {
 
             if (business == null) {
                 Toast.makeText(
-                    requireContext(),
+                    ctx,
                     "El comercio ya no existe",
                     Toast.LENGTH_LONG
                 ).show()
@@ -99,12 +123,87 @@ class BusinessDetailFragment : Fragment() {
             tvWebsite.text = if (business.website.isBlank()) "No registrado" else business.website
             tvInstagram.text = if (business.instagram.isBlank()) "No registrado" else business.instagram
 
+            // Mostrar / ocultar botón de valorar según sesión
+            val user = FirebaseAuth.getInstance().currentUser
+            btnRate.visibility = if (user == null) View.GONE else View.VISIBLE
+
+            btnRate.setOnClickListener {
+                openRateDialog(business.id)
+            }
+
             // Hacer clicables según haya datos
             setupPhoneClick(business.phone)
             setupEmailClick(business.email)
             setupWebsiteClick(business.website)
             setupInstagramClick(business.instagram)
+
+            // Cargar comentarios de este comercio (aquí también vamos a recalcular el promedio)
+            loadRatingsForBusiness(business.id)
         }
+    }
+
+    private fun loadRatingsForBusiness(businessId: String) {
+        firestore.collection("ratings")
+            .whereEqualTo("businessId", businessId)
+            .get()
+            .addOnSuccessListener { snapshot ->
+                val list = snapshot.documents.mapNotNull { it.toObject(Rating::class.java) }
+                commentsAdapter.updateData(list)
+
+                // Recalcular promedio y cantidad desde estas valoraciones
+                val ctx = context ?: return@addOnSuccessListener
+
+                if (list.isEmpty()) {
+                    tvRating.text = "Sin valoraciones"
+
+                    // También actualizamos el negocio en Firestore (por consistencia con el listado)
+                    firestore.collection("businesses")
+                        .document(businessId)
+                        .update(
+                            mapOf(
+                                "avgRating" to 0.0,
+                                "ratingCount" to 0
+                            )
+                        )
+                    return@addOnSuccessListener
+                }
+
+                val count = list.size
+                val sumStars = list.sumOf { it.stars }
+                val avg = sumStars.toDouble() / count.toDouble()
+
+                tvRating.text = "⭐ %.1f (%d valoraciones)".format(avg, count)
+
+                // Guardamos estos datos también en el documento del negocio
+                val updates = mapOf(
+                    "avgRating" to avg,
+                    "ratingCount" to count
+                )
+
+                firestore.collection("businesses")
+                    .document(businessId)
+                    .update(updates)
+            }
+            .addOnFailureListener { e ->
+                val ctx = context ?: return@addOnFailureListener
+                Toast.makeText(
+                    ctx,
+                    "Error al cargar comentarios: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+    }
+
+    private fun openRateDialog(businessId: String) {
+        val dialog = RateDialogFragment.newInstance(businessId)
+        dialog.onRatingSaved = {
+            // Recargar datos (incluye promedio y comentarios) solo si el fragment sigue activo
+            val id = this.businessId
+            if (isAdded && id != null) {
+                loadBusiness(id)
+            }
+        }
+        dialog.show(parentFragmentManager, "RateDialog")
     }
 
     // --- TELÉFONO: llamar o WhatsApp ---
@@ -146,7 +245,6 @@ class BusinessDetailFragment : Fragment() {
     }
 
     private fun openWhatsApp(phoneRaw: String) {
-        // Normalizamos: dejamos solo dígitos y posible +
         val cleaned = phoneRaw.filter { it.isDigit() || it == '+' }.trim()
 
         if (cleaned.isBlank()) {
@@ -158,9 +256,7 @@ class BusinessDetailFragment : Fragment() {
             return
         }
 
-        // Para WhatsApp usamos el formato https://wa.me/<numero>
         val url = "https://wa.me/${cleaned.replace("+", "")}"
-
         openExternalLink(url)
     }
 
@@ -250,5 +346,6 @@ class BusinessDetailFragment : Fragment() {
         }
     }
 }
+
 
 
