@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import cl.unab.busca_comercio.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 
 class RegisterFragment : Fragment() {
 
@@ -52,8 +53,17 @@ class RegisterFragment : Fragment() {
             }
 
             auth.createUserWithEmailAndPassword(email, password)
-                .addOnSuccessListener {
-                    findNavController().navigate(R.id.welcomeFragment)
+                .addOnSuccessListener { result ->
+                    val user = result.user
+
+                    val profileUpdates = UserProfileChangeRequest.Builder()
+                        .setDisplayName(name)
+                        .build()
+
+                    user?.updateProfile(profileUpdates)
+                        ?.addOnCompleteListener {
+                            findNavController().navigate(R.id.welcomeFragment)
+                        }
                 }
                 .addOnFailureListener { e ->
                     Toast.makeText(
