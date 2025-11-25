@@ -47,7 +47,7 @@ Instala la aplicación en tu dispositivo Android desde el enlace oficial:
 
 1. Clonar el repositorio:
    ```bash
-   git clone https://github.com/portegaseguel/BUSCACOMERCIO.git
+   git clone https://github.com/Portegaseguel/busca-comercio.git
 2. Abrir el proyecto en Android Studio.
 3. Agregar tu archivo google-services.json dentro de:
     app/
