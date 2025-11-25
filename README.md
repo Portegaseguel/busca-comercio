@@ -58,12 +58,12 @@ Instala la aplicación en tu dispositivo Android desde el enlace oficial:
 
 ## Estructura del proyecto
 
-app/src/main/java/... → Código fuente de la aplicación
-app/src/main/res/ → Layouts, colores, y recursos gráficos
-app/src/test/ → Tests unitarios
-app/src/androidTest/ → Tests UI con Espresso
-DemoDataSeeder.kt → Script que genera comercios demo en Firestore
-MainActivity.kt → Integración de navegación y bottom menu
+- app/src/main/java/... → Código fuente de la aplicación
+- app/src/main/res/ → Layouts, colores, y recursos gráficos
+- app/src/test/ → Tests unitarios
+- app/src/androidTest/ → Tests UI con Espresso
+- DemoDataSeeder.kt → Script que genera comercios demo en Firestore
+- MainActivity.kt → Integración de navegación y bottom menu
 
 ---
 
